@@ -23,7 +23,7 @@ public class Maximum<S extends Comparable<S>> {
         for (S data : arr) {
             System.out.print(data + " ");
         }
-        System.out.println("Maximum is " + max);
+        System.out.println("Maximum of %s,%s and %s is %s \n " + max);
     }
 
     private S max() {
