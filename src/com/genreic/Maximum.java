@@ -1,40 +1,47 @@
 package com.genreic;
 
-public class Maximum <T extends Comparable>{
-    T var1, var2, var3;
+public class Maximum<S extends Comparable<S>> {
+    private S[] inputArray;
 
-    public Maximum(T var1, T var2, T var3) {
-        this.var1 = var1;
-        this.var2 = var2;
-        this.var3 = var3;
+    public Maximum(S[] inputArray) {
+        this.inputArray = inputArray;
     }
 
     public static void main(String[] args) {
         System.out.println("Welcome to Generic Program.");
-        Integer a = 2, b = 4, c =6;
-        Float x =3.4f, y = 4.5f, z = 6.7f;
-        String l="apple",m="banana",n="orange";
-        Maximum<Integer> maximum = new Maximum<>(a, b, c);
-        maximum.max();
-        new Maximum<>(x, y, z).max();
-        new Maximum<>(l, m, n).max();
+
+        Integer[] intArr = {2, 3, 4, 5};
+        Float[] floatArr = {2.3f, 3.4f, 5.6f, 7.8f};
+        String[] stringArr = {"Apple", "Peach", "Banana", "Orange"};
+
+        printMax(intArr, new Maximum<>(intArr).max());
+        printMax(floatArr, new Maximum<>(floatArr).max());
+        printMax(stringArr, new Maximum<>(stringArr).max());
     }
 
-    private void max() {
-        Maximum.getMaximum(var1,var2,var3);
-    }
-
-    private static<T extends Comparable> void getMaximum(T a, T b, T c ){
-        T max = a;
-        if(b.compareTo(a)>0){
-            max = b;
+    private static <S> void printMax(S[] arr, S max) {
+        for (S data : arr) {
+            System.out.print(data + " ");
         }
-        if(c.compareTo(max)>0){
-            max = c;
-        }
-        System.out.println("Maximum::"+max); max = a;
-
+        System.out.println("Maximum is " + max);
     }
+
+    private S max() {
+        S maximum = Maximum.getMaximum(inputArray);
+        return maximum;
+    }
+
+
+    private static <S extends Comparable<S>> S getMaximum(S[] inputArray) {
+        S max = inputArray[0];//Initializing the Variable
+        for (S item : inputArray) {
+            if (item.compareTo(max) > 0) {
+                max = item;
+            }
+        }
+        return max;
+    }
+
 
 }
 
